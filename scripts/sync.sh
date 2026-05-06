@@ -9,10 +9,11 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Source directories (searched in order, first match wins)
 SOURCE_DIRS=(
-    "$SCRIPT_DIR/../anthropics-skills"
-    "$SCRIPT_DIR/../google-skills"
-    "$SCRIPT_DIR/../awesome-copilot"
-    "$SCRIPT_DIR/../antigravity-awesome-skills"
+    "$REPO_ROOT/anthropics-skills"
+    "$REPO_ROOT/google-skills"
+    "$REPO_ROOT/awesome-copilot"
+    "$REPO_ROOT/antigravity-awesome-skills"
+    "$REPO_ROOT"
 )
 
 ANTIGRAVITY_DIR="$HOME/.gemini/antigravity"
@@ -54,6 +55,8 @@ COPY_SKILLS=(
     "create-github-issues-feature-from-implementation-plan"
     "create-github-issues-for-unmet-specification-requirements"
     "create-github-pull-request-from-specification"
+    "commit-staged-changes"
+    "gh-pr-automation"
 )
 
 # ------------------------------------------------------------
@@ -198,13 +201,13 @@ sync_to_target() {
             else
                 echo "    X Not found: $item"
             fi
-            ((notfound++))
+            ((notfound++)) || true
             continue
         fi
 
         if [[ -e "$dest_item" && "$FORCE" == false ]]; then
             echo "    = Exists:    $item (use -f to overwrite)"
-            ((skipped++))
+            ((skipped++)) || true
             continue
         fi
 
@@ -212,7 +215,7 @@ sync_to_target() {
         echo $dest_item
         cp -r "$source_item" $dest_item
         echo "    + Copied:    $item"
-        ((copied++))
+        ((copied++)) || true
     done
 
     echo "    -> Copied: $copied | Skipped: $skipped | Not found: $notfound"
