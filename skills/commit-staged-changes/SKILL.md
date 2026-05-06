@@ -44,6 +44,7 @@ Analyze the staged diff to propose a message in the format:
 - Use the imperative, present tense: "change" not "changed" nor "changes"
 - Don't capitalize the first letter
 - No dot (.) at the end
+- Separate the subject and body of the commit message with a blank line.
 
 ### 3. Confirmation (Safety First)
 Before executing the commit, present the:
@@ -54,9 +55,18 @@ Before executing the commit, present the:
 ### 4. Execute Commit
 Once approved, run the commit command. Avoid using `-n` or `--no-verify` to ensure git hooks are executed.
 
+Use multiple `-m` flags to properly separate the subject and body — git inserts a blank line between them automatically:
+
 ```bash
-git commit -m "<proposed message>"
+git commit -m "<subject>" -m "<body>"
 ```
+
+## Output Format
+
+Always respond in **Markdown format**:
+- Use headers (`##`, `###`) to separate sections (staged files, summary, proposed message).
+- Use code blocks (` ``` `) for the proposed commit message and any shell commands.
+- Use bullet lists for staged files and change summaries.
 
 ## Gotchas
 
