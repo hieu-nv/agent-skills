@@ -55,8 +55,10 @@ Before executing the commit, present the:
 ### 4. Execute Commit
 Once approved, run the commit command. Avoid using `-n` or `--no-verify` to ensure git hooks are executed.
 
+Use multiple `-m` flags to properly separate the subject and body — git inserts a blank line between them automatically:
+
 ```bash
-git commit -m "<proposed message>"
+git commit -m "<subject>" -m "<body>"
 ```
 
 ## Output Format
