@@ -44,6 +44,7 @@ Analyze the staged diff to propose a message in the format:
 - Use the imperative, present tense: "change" not "changed" nor "changes"
 - Don't capitalize the first letter
 - No dot (.) at the end
+- Ensure that commit messages do not contain the `\n` character. Use a single blank line to separate the subject and body of the commit message.
 
 
 ### 3. Confirmation (Safety First)
