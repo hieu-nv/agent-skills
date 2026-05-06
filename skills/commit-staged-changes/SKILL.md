@@ -45,6 +45,7 @@ Analyze the staged diff to propose a message in the format:
 - Don't capitalize the first letter
 - No dot (.) at the end
 
+
 ### 3. Confirmation (Safety First)
 Before executing the commit, present the:
 1. List of staged files.
@@ -57,6 +58,13 @@ Once approved, run the commit command. Avoid using `-n` or `--no-verify` to ensu
 ```bash
 git commit -m "<proposed message>"
 ```
+
+## Output Format
+
+Always respond in **Markdown format**:
+- Use headers (`##`, `###`) to separate sections (staged files, summary, proposed message).
+- Use code blocks (` ``` `) for the proposed commit message and any shell commands.
+- Use bullet lists for staged files and change summaries.
 
 ## Gotchas
 
