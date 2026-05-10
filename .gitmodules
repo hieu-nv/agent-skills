@@ -10,3 +10,6 @@
 [submodule "anthropics-skills"]
 	path = anthropics-skills
 	url = https://github.com/anthropics/skills.git
+[submodule "gitlab-cli-skills"]
+	path = gitlab-cli-skills
+	url = https://github.com/vince-winkintel/gitlab-cli-skills.git
