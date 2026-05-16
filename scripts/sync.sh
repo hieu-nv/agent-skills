@@ -55,7 +55,6 @@ COPY_SKILLS=(
     "create-github-issues-feature-from-implementation-plan"
     "create-github-issues-for-unmet-specification-requirements"
     "create-github-pull-request-from-specification"
-    "commit-staged-changes"
     "gh-pr-automation"
 )
 
