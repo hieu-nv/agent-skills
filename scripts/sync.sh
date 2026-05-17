@@ -39,7 +39,6 @@ COPY_SKILLS=(
     "conventional-commit"
     "create-implementation-plan"
     "create-readme"
-    "gh-cli"
     "git-commit"
     "git-flow-branch-creator"
     "github-copilot-starter"
@@ -48,14 +47,13 @@ COPY_SKILLS=(
     "refactor"
     "refactor-plan"
     "review-and-refactor"
-    "tdd-workflow"
     "test-driven-development"
     "create-github-action-workflow-specification"
     "create-github-issue-feature-from-specification"
     "create-github-issues-feature-from-implementation-plan"
     "create-github-issues-for-unmet-specification-requirements"
     "create-github-pull-request-from-specification"
-    "gh-pr-automation"
+    "create-github-pull-request-from-current-branch"
 )
 
 # ------------------------------------------------------------

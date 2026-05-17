@@ -1,12 +1,12 @@
 ---
-name: gh-pr-automation
-description: 'Automate GitHub Pull Request creation using GitHub CLI (gh). Use when asked to create a PR, submit code for review, or merge a feature branch. Automatically crafts semantic titles, detailed descriptions from git diffs, and applies appropriate labels (bug, enhancement, refactor, etc.).'
+name: create-github-pull-request-from-current-branch
+description: 'Use this skill when you need to create a GitHub Pull Request (PR). It will automatically generate a semantic title, a detailed description from the git diff, and apply appropriate labels.'
 license: 'MIT'
 ---
 
-# GitHub PR Automation
+# Create a GitHub Pull Request from Current Branch
 
-This skill automates the creation of high-quality GitHub Pull Requests using the `gh` CLI. it ensures every PR has a clear summary, a categorized list of changes, and appropriate metadata.
+This skill automates the creation of high-quality GitHub Pull Requests using the `gh` CLI. It ensures every PR has a clear summary, a categorized list of changes, and appropriate metadata.
 
 ## When to Use This Skill
 
