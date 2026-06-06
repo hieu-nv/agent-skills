@@ -13,6 +13,3 @@
 [submodule "gitlab-cli-skills"]
 	path = gitlab-cli-skills
 	url = https://github.com/vince-winkintel/gitlab-cli-skills.git
-[submodule "team-agent-skills"]
-	path = team-agent-skills
-	url = https://github.com/iced-tea-relax/team-agent-skills.git
