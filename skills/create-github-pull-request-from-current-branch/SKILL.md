@@ -1,7 +1,6 @@
 ---
 name: create-github-pull-request-from-current-branch
 description: 'Use this skill when you need to create a GitHub Pull Request (PR). It will automatically generate a semantic title, a detailed description from the git diff, and apply appropriate labels.'
-license: 'MIT'
 ---
 
 # Create a GitHub Pull Request from Current Branch
