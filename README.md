@@ -1,62 +1,60 @@
 # Agent Skills Hub
 
-A curated monorepo of AI agent skills, instructions, and agents aggregated from the best community and official sources. Use the sync script to keep your local AI coding assistant configurations up to date from a single place.
+A collection of custom, production-grade AI agent skills to automate software engineering workflows. These skills are designed for modern AI coding assistants (like **Antigravity**, **Claude Code**, and **GitHub Copilot**) that support local skill execution.
 
 > [!NOTE]
-> All sub-collections are managed as Git submodules, so you pull from the authoritative upstream sources and can update them independently.
+> These skills leverage official command-line interfaces (`gh`, `glab`) to perform actions directly within your local workspace, maintaining security and speed.
 
-## What's inside
+## Available Skills
 
-| Collection | Source | Description |
-|---|---|---|
-| [awesome-copilot](awesome-copilot/) | [github/awesome-copilot](https://github.com/github/awesome-copilot) | Community agents, instructions, skills, hooks, and workflows for GitHub Copilot |
-| [antigravity-awesome-skills](antigravity-awesome-skills/) | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 1,445+ installable skills for Claude Code, Cursor, Gemini CLI, Copilot, and more |
-| [anthropics-skills](anthropics-skills/) | [anthropics/skills](https://github.com/anthropics/skills) | Official Anthropic skills for Claude, including document creation and enterprise workflows |
-| [google-skills](google-skills/) | [google/skills](https://github.com/google/skills) | Official Google Cloud skills covering GKE, BigQuery, Cloud Run, Firebase, and more |
-| [gitlab-cli-skills](gitlab-cli-skills/) | [vince-winkintel/gitlab-cli-skills](https://github.com/vince-winkintel/gitlab-cli-skills) | Skills for GitLab CLI workflows |
-| [skills/](skills/) | local | Custom personal skills not found upstream |
+| Skill Name | Target CLI | Description |
+| :--- | :--- | :--- |
+| [`create-github-pull-request-from-current-branch`](skills/create-github-pull-request-from-current-branch/) | `gh` | Automates PR creation with Conventional Commits titles, semantic change summaries, and labels. |
+| [`create-gitlab-issues-from-implementation-plan`](skills/create-gitlab-issues-from-implementation-plan/) | `glab` | Parses a markdown implementation plan and batch-creates issues on GitLab (deduplicating existing ones). |
+| [`create-gitlab-merge-request-from-current-branch`](skills/create-gitlab-merge-request-from-current-branch/) | `glab` | Automates GitLab MR creation with structured descriptions, change summaries, and labels. |
 
-## Syncing skills locally
+---
 
-The `sync.sh` script copies a curated selection of skills to your local AI tool configuration directories:
+## Installation & Setup
 
-- `~/.copilot/skills/` — picked up by GitHub Copilot
-- `~/.gemini/antigravity/skills/` — picked up by Antigravity and Gemini CLI
+To make these skills available to your AI coding assistant, copy or symlink their directories into your local tools configuration folder.
+
+### Configuration Targets
+- **Antigravity / Gemini CLI**: `~/.gemini/config/skills/`
+- **GitHub Copilot**: `~/.copilot/skills/`
+
+### 1. Manual Copy
+You can copy the specific skills you want directly to the target directory:
 
 ```bash
-# First time: copy skills to both targets
-./scripts/sync.sh
+# Ensure target directories exist
+mkdir -p ~/.gemini/config/skills
+mkdir -p ~/.copilot/skills
 
-# Overwrite existing files (force update)
-./scripts/sync.sh -f
+# Example: Copy the GitHub PR creation skill
+cp -R skills/create-github-pull-request-from-current-branch ~/.gemini/config/skills/
+cp -R skills/create-github-pull-request-from-current-branch ~/.copilot/skills/
 ```
 
-The script searches sub-collections in order (`anthropics-skills` → `google-skills` → `awesome-copilot` → `antigravity-awesome-skills` → root), and uses the first match found for each skill. Skills not present in any source are removed from the destination.
+### 2. Symlink (Recommended)
+Using symlinks ensures that any updates to this repository are immediately reflected in your AI tools without recopying.
+
+```bash
+# Symlink all skills to Antigravity
+for skill in skills/*; do
+  ln -sf "$(pwd)/$skill" "$HOME/.gemini/config/skills/$(basename "$skill")"
+done
+```
 
 > [!TIP]
-> Edit `COPY_SKILLS`, `COPY_AGENTS`, `COPY_INSTRUCTIONS`, `COPY_WORKFLOWS`, and `COPY_HOOKS` at the top of `scripts/sync.sh` to customize what gets synced.
+> After installing a skill, verify your AI coding assistant has detected it. In Antigravity, you can verify by checking if the skill is listed in your active skills context or by prompting: *"Can you use the create-github-pull-request-from-current-branch skill?"*
 
-## Keeping submodules up to date
+---
 
-```bash
-# Initialize and clone all submodules on first checkout
-git submodule update --init --recursive
+## Prerequisites
 
-# Pull the latest upstream changes for all submodules
-git submodule update --remote --merge
-```
+Ensure you have the required CLI tools installed and authenticated on your machine:
 
-## Adding a new collection
+- **GitHub CLI**: `brew install gh` & `gh auth login`
+- **GitLab CLI**: `brew install glab` & `glab auth login`
 
-```bash
-git submodule add <repository-url> <local-folder-name>
-```
-
-Then add the new folder to the `SOURCE_DIRS` list in `scripts/sync.sh` and pick the specific skills or agents you want to sync.
-
-## Resources
-
-- [agentskills.io](https://agentskills.io) — The Agent Skills specification and ecosystem hub
-- [awesome-copilot website](https://awesome-copilot.github.com) — Browse the full Copilot collection with search and filtering
-- [Antigravity catalog](https://github.com/sickn33/antigravity-awesome-skills) — Full catalog of 1,445+ skills
-- [Anthropic Agent Skills docs](https://support.claude.com/en/articles/12512176-what-are-skills) — Learn how skills work in Claude
